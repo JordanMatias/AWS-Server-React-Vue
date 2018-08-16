@@ -42,39 +42,48 @@ function spacebarHandler(e) {
 //new instances of components
 
 var ball = new Ball(width / 2, height - 30, 8, -8, 10, "blue");
-var paddle = new Paddle((width - 75) / 2, height - 15, 150, 15, "white");
+var paddle = new Paddle((width - 150) / 2, height - 15, 150, 15, "white");
+
+// sound
 var hit = new Audio("/sounds/paddlehit.mp3");
 var collide = new Audio("/sounds/pop.mp3");
 collide.volume = 3;
 var livesLost = new Audio("/sounds/loselife.mp3");
 
-var score = 0;
-var lives = 5;
+//images
+var gameover = new Image();
+gameover.src = "/images/gameover.jpg";
+var youwin = new Image();
+youwin.src = "/images/youwin.png";
 
-//draw score & draw lives
+//lives, score, win/lose
+var score = 0;
+var lives = 3;
+
 function drawScore() {
   ctx.font = "22px courier";
   ctx.fillStyle = "white";
-  ctx.fillText("Score: " + score, 15, 20);
+  ctx.fillText("Score: " + score, 15, 30);
 }
 function drawLives() {
   ctx.font = "22px courier";
   ctx.fillStyle = "white";
-  ctx.fillText("Lives: " + lives, canvas.width - 120, 20);
+  ctx.fillText("Lives: " + lives, canvas.width - 120, 30);
 }
 
-// win/lose
+function winOrLose() {
+  if (lives <= 0) {
+    ctx.drawImage(gameover, 0, 0, canvas.width, canvas.height);
+    if (ball.isStopped === false) {
+      document.location.reload();
+    }
+  }
 
-function lose() {
-  if (lives === 0) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.rect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
-    document.location.reload();
+  if (score === brickRowCount * brickColumnCount) {
+    ctx.drawImage(youwin, 0, 0, canvas.width, canvas.height);
+    if (ball.isStopped === false) {
+      document.location.reload();
+    }
   }
 }
 
@@ -92,7 +101,7 @@ function update() {
   collisionDetection(ball, collide);
   drawScore();
   drawLives();
-  lose();
+  winOrLose();
 }
 
 update();

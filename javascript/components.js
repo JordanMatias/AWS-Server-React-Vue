@@ -104,8 +104,8 @@ var brickColumnCount = 5;
 var brickWidth = 75;
 var brickHeight = 20;
 var brickPadding = 10;
-var brickOffsetTop = 35;
-var brickOffsetLeft = 65;
+var brickOffsetTop = 50;
+var brickOffsetLeft = 15;
 
 var bricks = [];
 for (var c = 0; c < brickColumnCount; c++) {
@@ -168,10 +168,6 @@ function collisionDetection(ball, collide) {
           collide.play();
           b.status = 0;
           score++;
-          if (score == brickRowCount * brickColumnCount) {
-            alert("YOU WIN, CONGRATS!");
-            document.location.reload();
-          }
         }
       }
     }
@@ -187,5 +183,6 @@ function Audio(src) {
   };
 }
 
-// bounce = new Audio(src)
-// lose = new Audio(src)
+// function Image(){
+//   this.image
+// }
