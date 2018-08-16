@@ -40,6 +40,8 @@ var ball = new Ball(width / 2, height - 30, 8, -8, 10, "blue");
 var paddle = new Paddle((width - 75) / 2, height - 15, 150, 15, "white");
 var hit = new Audio("/sounds/paddlehit.mp3");
 var collide = new Audio("/sounds/pop.mp3");
+collide.vol = 1;
+var livesLost = new Audio("/sounds/loselife.mp3");
 
 var score = 0;
 var lives = 5;
@@ -77,7 +79,7 @@ function update() {
   ctx.clearRect(0, 0, width, height);
   requestAnimationFrame(update);
   ball.draw();
-  ball.update(paddle);
+  ball.update(paddle, livesLost);
   paddle.draw();
   paddle.update();
   paddle.collision(ball, hit);

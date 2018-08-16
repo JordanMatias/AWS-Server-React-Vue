@@ -19,7 +19,7 @@ Ball.prototype.draw = function() {
   ctx.closePath();
 };
 
-Ball.prototype.update = function(paddle) {
+Ball.prototype.update = function(paddle, livesLost) {
   if (this.isStopped) return;
   this.x += this.dx;
   this.y += this.dy;
@@ -36,14 +36,15 @@ Ball.prototype.update = function(paddle) {
     /* || this.y + this.dy > canvas.height <-- code to bounce at bottom */
     this.dy = -this.dy;
   } else if (this.y > canvas.height - this.radius) {
-    this.resetBall(paddle);
+    this.resetBall(paddle, livesLost);
     paddle.resetPaddle();
     drawBricks();
   }
 };
 
-Ball.prototype.resetBall = function(paddle) {
+Ball.prototype.resetBall = function(paddle, livesLost) {
   lives--;
+  livesLost.play();
   this.isStopped = true;
   this.x = 400;
   this.y = canvas.height - 30;
