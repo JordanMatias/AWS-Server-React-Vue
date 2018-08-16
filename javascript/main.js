@@ -12,6 +12,11 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("keydown", spacebarHandler, false);
 
+// ctx.font = "50px Impact";
+// ctx.fillStyle = "white";
+// ctx.textAlign = "center";
+// ctx.fillText("BREKOUT GAME", width / 2, height / 2);
+
 function keyDownHandler(e) {
   if (e.keyCode === 39) {
     rightPressed = true;
@@ -40,7 +45,7 @@ var ball = new Ball(width / 2, height - 30, 8, -8, 10, "blue");
 var paddle = new Paddle((width - 75) / 2, height - 15, 150, 15, "white");
 var hit = new Audio("/sounds/paddlehit.mp3");
 var collide = new Audio("/sounds/pop.mp3");
-collide.vol = 1;
+collide.volume = 3;
 var livesLost = new Audio("/sounds/loselife.mp3");
 
 var score = 0;

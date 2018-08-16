@@ -100,7 +100,7 @@ Paddle.prototype.collision = function(ball, hit) {
 ////////////////////////////////////////////
 
 var brickRowCount = 8;
-var brickColumnCount = 4;
+var brickColumnCount = 5;
 var brickWidth = 75;
 var brickHeight = 20;
 var brickPadding = 10;
