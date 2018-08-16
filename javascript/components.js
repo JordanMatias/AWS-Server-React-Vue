@@ -85,13 +85,14 @@ Paddle.prototype.resetPaddle = function() {
   this.dy = -this.dx;
 };
 
-Paddle.prototype.collision = function(ball) {
+Paddle.prototype.collision = function(ball, hit) {
   if (
     ball.x + ball.radius >= this.x &&
     ball.x - ball.radius <= this.x + this.width &&
     ball.y + ball.radius / 2 >= this.y
   ) {
     ball.dy = -ball.dy; //* 1.5;
+    hit.play();
   }
 };
 
@@ -151,7 +152,7 @@ function drawBricks() {
 
 //collision detection
 
-function collisionDetection(ball) {
+function collisionDetection(ball, collide) {
   for (var c = 0; c < brickColumnCount; c++) {
     for (var r = 0; r < brickRowCount; r++) {
       var b = bricks[c][r];
@@ -163,6 +164,7 @@ function collisionDetection(ball) {
           ball.y < b.y + brickHeight
         ) {
           ball.dy = -ball.dy;
+          collide.play();
           b.status = 0;
           score++;
           if (score == brickRowCount * brickColumnCount) {
@@ -175,82 +177,14 @@ function collisionDetection(ball) {
   }
 }
 
-///BRICKS////
+function Audio(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.style.display = "none";
+  this.play = function() {
+    this.sound.play();
+  };
+}
 
-// function Brick(
-//   width,
-//   height,
-//   columns,
-//   rows,
-//   padding,
-//   offsetLeft,
-//   offsetTop,
-//   color
-// ) {
-//   this.x; //(columns) * (this.width + this.padding) + this.offsetLeft
-//   this.y;
-//   this.width = width;
-//   this.height = height;
-//   this.columns = columns;
-//   this.rows = rows;
-//   this.padding = padding;
-//   this.offsetLeft = offsetLeft;
-//   this.offsetTop = offsetTop;
-//   this.color = color;
-//   this.bricks = [];
-// }
-
-// Brick.prototype.draw = function(ball) {
-//   for (var i = 0; i < this.columns; i++) {
-//     //used to create brick columns (empty)
-//     this.bricks[i] = [];
-//     for (var j = 0; j < this.rows; j++) {
-//       this.bricks[i][j] = { x: 0, y: 0 }; //creates starting x and y position of bricks
-//     }
-//   }
-
-//   for (var i = 0; i < this.columns; i++) {
-//     for (var j = 0; j < this.rows; j++) {
-//       //console.log(this.brickStatus);
-//       if (this.status !== false) {
-//         this.x = i * (this.width + this.padding) + this.offsetLeft;
-//         this.y = j * (this.height + this.padding) + this.offsetTop;
-//         this.bricks[i][j].x = this.x;
-//         this.bricks[i][j].y = this.y;
-//         ctx.beginPath();
-//         ctx.rect(this.x, this.y, this.width, this.height);
-//         ctx.fillStyle = this.color;
-//         ctx.fill();
-//         ctx.closePath();
-//       }
-//     }
-//   }
-// };
-
-// Brick.prototype.collision = function(ball) {
-//   // to detect is ball coordinates hit brick coordinate
-//   for (var i = 0; i < this.columns; i++) {
-//     for (var j = 0; j < this.rows; j++) {
-//       var b = this.bricks[i][j];
-//       console.log(b.status); //coordinates of brick hit by ball
-//       if (b.status === true) {
-//         if (
-//           ball.x > b.x &&
-//           ball.x < b.x + this.width &&
-//           ball.y > b.y &&
-//           ball.y < b.y + this.height
-//         ) {
-//           ball.dy = -ball.dy;
-//           b.status = false;
-//           //score++;
-//           ///console.log(this.bricks[i][j]);
-//           // if (score === brickColumnCount * brickRowCount) {
-//           //   alert("You win!");
-//           //   //document.location.reload() - autoreloads
-//           //   //start button?
-//           // }
-//         }
-//       }
-//     }
-//   }
-// };
+// bounce = new Audio(src)
+// lose = new Audio(src)

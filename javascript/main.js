@@ -31,7 +31,6 @@ function keyUpHandler(e) {
 function spacebarHandler(e) {
   if (e.keyCode === 32) {
     ball.isStopped = false;
-    console.log(ball.isStopped);
   }
 }
 
@@ -39,6 +38,9 @@ function spacebarHandler(e) {
 
 var ball = new Ball(width / 2, height - 30, 8, -8, 10, "blue");
 var paddle = new Paddle((width - 75) / 2, height - 15, 150, 15, "white");
+var hit = new Audio("/sounds/paddlehit.mp3");
+var collide = new Audio("/sounds/pop.mp3");
+
 var score = 0;
 var lives = 5;
 
@@ -51,7 +53,7 @@ function drawScore() {
 function drawLives() {
   ctx.font = "22px courier";
   ctx.fillStyle = "white";
-  ctx.fillText("Lives: " + lives, canvas.width - 100, 20);
+  ctx.fillText("Lives: " + lives, canvas.width - 120, 20);
 }
 
 // win/lose
@@ -78,14 +80,12 @@ function update() {
   ball.update(paddle);
   paddle.draw();
   paddle.update();
-  paddle.collision(ball);
+  paddle.collision(ball, hit);
   drawBricks();
-  collisionDetection(ball);
+  collisionDetection(ball, collide);
   drawScore();
   drawLives();
   lose();
-  console.log(paddle.x, paddle.y);
 }
 
 update();
-console.log("Hello");
