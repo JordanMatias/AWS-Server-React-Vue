@@ -8,6 +8,7 @@ function Ball(x, y, dx, dy, radius, color) {
   //this.dxRange = this.dx * 2;
   this.radius = radius;
   this.color = color;
+  this.isStopped = true;
 }
 
 Ball.prototype.draw = function() {
@@ -19,6 +20,7 @@ Ball.prototype.draw = function() {
 };
 
 Ball.prototype.update = function(paddle) {
+  if (this.isStopped) return;
   this.x += this.dx;
   this.y += this.dy;
 
@@ -29,25 +31,24 @@ Ball.prototype.update = function(paddle) {
   ) {
     this.dx = -this.dx;
   }
-
   //bouncing off top
   if (this.y + this.dy < this.radius) {
     /* || this.y + this.dy > canvas.height <-- code to bounce at bottom */
     this.dy = -this.dy;
-  } else if (this.y + this.dy > canvas.height - this.radius) {
-    lives--;
-
-    if (!lives) {
-      alert("GAME OVER");
-      document.location.reload();
-    } else {
-      this.x = canvas.width / 2;
-      this.y = canvas.height - 30;
-      this.dx = dx;
-      this.dy = -this.dy;
-      paddle.x = (canvas.width - paddle.width) / 2;
-    }
+  } else if (this.y > canvas.height - this.radius) {
+    this.resetBall(paddle);
+    paddle.resetPaddle();
+    drawBricks();
   }
+};
+
+Ball.prototype.resetBall = function(paddle) {
+  lives--;
+  this.isStopped = true;
+  this.x = 400;
+  this.y = canvas.height - 30;
+  this.dx = 8;
+  this.dy = -8;
 };
 
 /////PADDLE/////
@@ -58,6 +59,7 @@ function Paddle(x, y, width, height, color) {
   this.width = width;
   this.height = height;
   this.color = color;
+  this.isStopped = true;
 }
 
 Paddle.prototype.draw = function() {
@@ -74,6 +76,13 @@ Paddle.prototype.update = function() {
   } else if (leftPressed && this.x > 0) {
     this.x -= 15;
   }
+};
+
+Paddle.prototype.resetPaddle = function() {
+  this.x = 317.5;
+  this.y = 585;
+  this.dx = this.dx;
+  this.dy = -this.dx;
 };
 
 Paddle.prototype.collision = function(ball) {
@@ -114,7 +123,23 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = "black";
+        if (r == 0) {
+          ctx.fillStyle = "#1fe2df";
+        } else if (r == 1) {
+          ctx.fillStyle = "#27ae60";
+        } else if (r == 2) {
+          ctx.fillStyle = "#ED8F03";
+        } else if (r == 3) {
+          ctx.fillStyle = "#005dff";
+        } else if (r == 4) {
+          ctx.fillStyle = "#961894";
+        } else if (r == 5) {
+          ctx.fillStyle = "#fff200";
+        } else if (r == 6) {
+          ctx.fillStyle = "#e52020";
+        } else if (r == 7) {
+          ctx.fillStyle = "#65e520";
+        }
         ctx.fill();
         ctx.closePath();
       }

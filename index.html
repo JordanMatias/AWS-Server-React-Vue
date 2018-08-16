@@ -6,12 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Breakout</title>
-  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <canvas id="myCanvas" width="800" height="600"></canvas>
+  <!-- Game Container -->
+
+
+
+
+  <div class="flex-container">
+    <div class="top-div">
+      <h1>BREAKOUT GAME</h1>
+    </div>
+    <div class="canvas">
+      <canvas id="myCanvas" width="800" height="600"></canvas>
+    </div>
+    <div class="footer">
+      <p>
+        Use left and right keys to move paddle.
+        <br> Press spacebar to start game.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- Modal for game over -->
+  <!-- <div class="modal-overlay">
+  </div>
+  <div class="modal-box">
+    <h3>Game Over</h3>
+    <p class="modal-message">Congratulations, you've beaten the game. Would you like to play again?</p>
+    <a href="#" class="btn-play-again">Play breakout again!</a>
+  </div> -->
+
   <script src="/javascript/components.js"></script>
   <script src="/javascript/main.js"></script>
   <!-- <script src="/javascript/game.js"></script> -->

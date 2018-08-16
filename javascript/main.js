@@ -10,6 +10,7 @@ var leftPressed = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("keydown", spacebarHandler, false);
 
 function keyDownHandler(e) {
   if (e.keyCode === 39) {
@@ -27,26 +28,46 @@ function keyUpHandler(e) {
   }
 }
 
+function spacebarHandler(e) {
+  if (e.keyCode === 32) {
+    ball.isStopped = false;
+    console.log(ball.isStopped);
+  }
+}
+
 //new instances of components
 
 var ball = new Ball(width / 2, height - 30, 8, -8, 10, "blue");
-var paddle = new Paddle((width - 75) / 2, height - 15, 100, 15, "black");
+var paddle = new Paddle((width - 75) / 2, height - 15, 150, 15, "white");
 var score = 0;
 var lives = 5;
 
 //draw score & draw lives
 function drawScore() {
-  ctx.font = "16px Obitron";
-  ctx.fillStyle = "#0095DD";
+  ctx.font = "22px courier";
+  ctx.fillStyle = "white";
   ctx.fillText("Score: " + score, 15, 20);
 }
 function drawLives() {
-  ctx.font = "16px Obitron";
-  ctx.fillStyle = "#0095DD";
-  ctx.fillText("Lives: " + lives, canvas.width - 80, 20);
+  ctx.font = "22px courier";
+  ctx.fillStyle = "white";
+  ctx.fillText("Lives: " + lives, canvas.width - 100, 20);
 }
 
 // win/lose
+
+function lose() {
+  if (lives === 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.rect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+    document.location.reload();
+  }
+}
 
 //the update function
 
@@ -62,6 +83,8 @@ function update() {
   collisionDetection(ball);
   drawScore();
   drawLives();
+  lose();
+  console.log(paddle.x, paddle.y);
 }
 
 update();
