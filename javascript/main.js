@@ -41,7 +41,7 @@ var paddle = new Paddle((width - 150) / 2, height - 15, 150, 15, "white");
 
 // sound
 var hit = new Audio("/sounds/paddlehit.mp3");
-var collide = new Audio("/sounds/pop.mp3");
+var collide = new Audio("/sounds/boing.mp3");
 collide.volume = 3;
 var livesLost = new Audio("/sounds/loselife.mp3");
 

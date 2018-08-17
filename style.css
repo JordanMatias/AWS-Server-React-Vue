@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Lobster");
-@import url("https://fonts.googleapis.com/css?family=Lobster|Monoton");
+@import url("https://fonts.googleapis.com/css?family=Monoton");
+@import url("https://fonts.googleapis.com/css?family=Catamaran");
 
 body {
   background: black;
@@ -36,6 +36,7 @@ body > div > div.top-div > p {
 }
 
 body > div > div.footer > p {
+  font-family: "Catamaran", sans-serif;
   color: white;
   font-size: 20px;
   text-align: center;
