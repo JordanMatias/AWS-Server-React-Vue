@@ -182,7 +182,3 @@ function Audio(src) {
     this.sound.play();
   };
 }
-
-// function Image(){
-//   this.image
-// }

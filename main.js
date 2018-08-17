@@ -40,16 +40,16 @@ var ball = new Ball(width / 2, height - 30, 8, -8, 10, "blue");
 var paddle = new Paddle((width - 150) / 2, height - 15, 150, 15, "white");
 
 // sound
-var hit = new Audio("/sounds/paddlehit.mp3");
-var collide = new Audio("/sounds/boing.mp3");
+var hit = new Audio("sounds/paddlehit.mp3");
+var collide = new Audio("sounds/boing.mp3");
 collide.volume = 3;
-var livesLost = new Audio("/sounds/loselife.mp3");
+var livesLost = new Audio("sounds/loselife.mp3");
 
 //images
 var gameover = new Image();
-gameover.src = "/images/gameover.jpg";
+gameover.src = "images/gameover.jpg";
 var youwin = new Image();
-youwin.src = "/images/youwin.png";
+youwin.src = "images/youwin.png";
 
 //lives, score, win/lose
 var score = 0;
