@@ -1,11 +1,8 @@
-/////BALL/////
-
 function Ball(x, y, dx, dy, radius, color) {
   this.x = x;
   this.y = y;
   this.dx = dx;
   this.dy = dy;
-  //this.dxRange = this.dx * 2;
   this.radius = radius;
   this.color = color;
   this.isStopped = true;
@@ -33,7 +30,6 @@ Ball.prototype.update = function(paddle, livesLost) {
   }
   //bouncing off top
   if (this.y + this.dy < this.radius) {
-    /* || this.y + this.dy > canvas.height <-- code to bounce at bottom */
     this.dy = -this.dy;
   } else if (this.y > canvas.height - this.radius) {
     this.resetBall(paddle, livesLost);
@@ -51,8 +47,6 @@ Ball.prototype.resetBall = function(paddle, livesLost) {
   this.dx = 8;
   this.dy = -8;
 };
-
-/////PADDLE/////
 
 function Paddle(x, y, width, height, color) {
   this.x = x;
@@ -97,8 +91,6 @@ Paddle.prototype.collision = function(ball, hit) {
   }
 };
 
-////////////////////////////////////////////
-
 var brickRowCount = 8;
 var brickColumnCount = 5;
 var brickWidth = 75;
@@ -126,21 +118,21 @@ function drawBricks() {
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
         if (r == 0) {
-          ctx.fillStyle = "#1fe2df";
+          ctx.fillStyle = '#1fe2df';
         } else if (r == 1) {
-          ctx.fillStyle = "#27ae60";
+          ctx.fillStyle = '#27ae60';
         } else if (r == 2) {
-          ctx.fillStyle = "#ED8F03";
+          ctx.fillStyle = '#ED8F03';
         } else if (r == 3) {
-          ctx.fillStyle = "#005dff";
+          ctx.fillStyle = '#005dff';
         } else if (r == 4) {
-          ctx.fillStyle = "#961894";
+          ctx.fillStyle = '#961894';
         } else if (r == 5) {
-          ctx.fillStyle = "#fff200";
+          ctx.fillStyle = '#fff200';
         } else if (r == 6) {
-          ctx.fillStyle = "#e52020";
+          ctx.fillStyle = '#e52020';
         } else if (r == 7) {
-          ctx.fillStyle = "#65e520";
+          ctx.fillStyle = '#65e520';
         }
         ctx.fill();
         ctx.closePath();
@@ -148,10 +140,6 @@ function drawBricks() {
     }
   }
 }
-
-// var brick = new Brick(75, 20, 6, 3, 10, 40, 30, "292929");
-
-//collision detection
 
 function collisionDetection(ball, collide) {
   for (var c = 0; c < brickColumnCount; c++) {
@@ -175,9 +163,9 @@ function collisionDetection(ball, collide) {
 }
 
 function Audio(src) {
-  this.sound = document.createElement("audio");
+  this.sound = document.createElement('audio');
   this.sound.src = src;
-  this.sound.style.display = "none";
+  this.sound.style.display = 'none';
   this.play = function() {
     this.sound.play();
   };
