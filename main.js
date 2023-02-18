@@ -18,6 +18,28 @@ function keyDownHandler(e) {
   }
 }
 
+function drawLives() {
+  ctx.font = '22px courier';
+  ctx.fillStyle = 'white';
+  ctx.fillText('Lives: ' + lives, canvas.width - 120, 30);
+}
+
+function winOrLose() {
+  if (lives <= 0) {
+    ctx.drawImage(gameover, 0, 0, canvas.width, canvas.height);
+    if (ball.isStopped === false) {
+      document.location.reload();
+    }
+  }
+
+  if (score === brickRowCount * brickColumnCount) {
+    ctx.drawImage(youwin, 0, 0, canvas.width, canvas.height);
+    if (ball.isStopped === false) {
+      document.location.reload();
+    }
+  }
+}
+
 function keyUpHandler(e) {
   if (e.keyCode === 39) {
     rightPressed = false;
@@ -43,6 +65,14 @@ var gameover = new Image();
 gameover.src = 'images/gameover.jpg';
 var youwin = new Image();
 youwin.src = 'images/youwin.png';
+
+function keyDownHandler(e) {
+  if (e.keyCode === 39) {
+    rightPressed = true;
+  } else if (e.keyCode === 37) {
+    leftPressed = true;
+  }
+}
 
 var score = 0;
 var lives = 3;
